@@ -16,31 +16,31 @@ const assets = {
   "/_nuxt/bootstrap-6162a612.mjs": {
     "type": "application/javascript",
     "etag": "\"1a61c-yZwPSYWHqpvftQVHIZ7/PUyH3sY\"",
-    "mtime": "2022-02-08T16:27:22.353Z",
+    "mtime": "2022-02-08T16:49:10.606Z",
     "path": "../public/_nuxt/bootstrap-6162a612.mjs"
   },
   "/_nuxt/bootstrap.8fd81345.css": {
     "type": "text/css; charset=utf-8",
     "etag": "\"12bf-uLRHCXQBUQu72xTq4E3u6AOdWyI\"",
-    "mtime": "2022-02-08T16:27:22.353Z",
+    "mtime": "2022-02-08T16:49:10.605Z",
     "path": "../public/_nuxt/bootstrap.8fd81345.css"
   },
   "/_nuxt/entry-f5283ad3.mjs": {
     "type": "application/javascript",
     "etag": "\"65-U9C+2ApmDk9PRu4HHeZJCh3sRbo\"",
-    "mtime": "2022-02-08T16:27:22.352Z",
+    "mtime": "2022-02-08T16:49:10.604Z",
     "path": "../public/_nuxt/entry-f5283ad3.mjs"
   },
   "/_nuxt/index-42d4101c.mjs": {
     "type": "application/javascript",
     "etag": "\"63e-xGiPuRkJFXIjKbRfwBECA/OdR+Y\"",
-    "mtime": "2022-02-08T16:27:22.352Z",
+    "mtime": "2022-02-08T16:49:10.603Z",
     "path": "../public/_nuxt/index-42d4101c.mjs"
   },
   "/_nuxt/manifest.json": {
     "type": "application/json",
     "etag": "\"25b-glc0HEHFs8Xn+XUsYNW1Wb0cZYo\"",
-    "mtime": "2022-02-08T16:27:22.352Z",
+    "mtime": "2022-02-08T16:49:10.603Z",
     "path": "../public/_nuxt/manifest.json"
   }
 };
@@ -57,7 +57,7 @@ function getAsset (id) {
 
 const METHODS = ["HEAD", "GET"];
 const TWO_DAYS = 2 * 60 * 60 * 24;
-const STATIC_ASSETS_BASE = "/_nuxt/Users/tim/projects/timvandaatselaar.github.io/dist" + "/" + "1644337640";
+const STATIC_ASSETS_BASE = "/_nuxt/Users/tim/projects/timvandaatselaar.github.io/dist" + "/" + "1644338948";
 async function serveStatic(req, res) {
   if (!METHODS.includes(req.method)) {
     return;

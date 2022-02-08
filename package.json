@@ -5,7 +5,7 @@
     "build": "nuxi build",
     "start": "node .output/server/index.mjs",
     "predeploy": "nuxt build",
-    "deploy": "gh-pages -d .output"
+    "deploy": "gh-pages -d .output/server/index.mjs"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
