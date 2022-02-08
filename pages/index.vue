@@ -1,18 +1,18 @@
 <template>
   <div class="flex min-h-screen items-center py-20 px-8">
     <div class="mx-auto w-full max-w-5xl">
-      <div class="max-w-xl">
+      <div class="max-w-2xl pr-8">
         <p
           class="text-3xl font-semibold leading-snug lg:text-5xl lg:leading-snug"
         >
-          I'm Tim, a Dutch Frontend Developer. I work at
+          👋<br />
+          I'm Tim, a Dutch Frontend Developer, currently working at
           <a
             href="https://gravity.nl"
             target="_blank"
             class="text-blue-500 underline hover:no-underline"
             >Gravity</a
-          >
-          and am specialized in
+          >. I specialize in
           <a
             href="https://tailwindcss.com/"
             target="_blank"
