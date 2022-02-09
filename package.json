@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
-    "generate": "export NITRO_PRESET=browser && npm run build"
+    "predeploy": "nuxi build",
+    "deploy": "gh-pages -d .output/public"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",

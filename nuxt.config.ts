@@ -1,6 +1,12 @@
 import { defineNuxtConfig } from "nuxt3";
 
 export default defineNuxtConfig({
+  nitro: {
+    preset: "browser",
+  },
+  router: {
+    base: "/",
+  },
   vite: {
     logLevel: "info",
   },
@@ -9,5 +15,8 @@ export default defineNuxtConfig({
     postcss: {
       postcssOptions: require("./postcss.config.js"),
     },
+  },
+  router: {
+    base: "/your-github-repository-name/",
   },
 });
