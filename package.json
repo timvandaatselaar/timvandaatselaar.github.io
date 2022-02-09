@@ -13,5 +13,11 @@
     "prettier": "^2.5.1",
     "prettier-plugin-tailwindcss": "^0.1.4",
     "tailwindcss": "^3.0.18"
+  },
+  "pnpm": {
+    "overrides": {
+      "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
+      "@nuxt/kit-edge": "latest"
+    }
   }
 }
