@@ -1,33 +1,32 @@
 name: cd
-
-on: [push, pull_request]
-
+on:
+  push:
+    branches:
+      - main
 jobs:
-  cd:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [14]
-
+  deploy:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-
-      - name: Setup node env
-        uses: actions/setup-node@v2.1.2
+      - uses: actions/checkout@v2
         with:
-          node-version: ${{ matrix.node }}
+          submodules: true
 
-      - name: Install dependencies
-        run: yarn
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
 
-      - name: Generate
-        run: yarn build
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+        env:
+          NITRO_PRESET: browser
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .output/public
+          publish_dir: ".output/public"
+          force_orphan: true

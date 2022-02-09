@@ -3,9 +3,7 @@
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
-    "start": "node .output/server/index.mjs",
-    "predeploy": "nuxt build",
-    "deploy": "gh-pages -d .output/server/index.mjs"
+    "generate": "export NITRO_PRESET=browser && npm run build"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",

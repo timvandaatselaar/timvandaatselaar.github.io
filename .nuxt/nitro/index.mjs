@@ -147,7 +147,7 @@ server.listen(listenAddress, () => {
   });
 });
 
-const STATIC_ASSETS_BASE = "/_nuxt/Users/tim/projects/timvandaatselaar.github.io/dist" + "/" + "1644396863";
+const STATIC_ASSETS_BASE = "/_nuxt/Users/tim/projects/timvandaatselaar.github.io/dist" + "/" + "1644399565";
 const PAYLOAD_JS = "/payload.js";
 const getClientManifest = cachedImport(() => import('/Users/tim/projects/timvandaatselaar.github.io/.nuxt/dist/server/client.manifest.mjs'));
 const getSSRApp = cachedImport(() => import('/Users/tim/projects/timvandaatselaar.github.io/.nuxt/dist/server/server.mjs'));
