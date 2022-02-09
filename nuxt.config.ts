@@ -2,7 +2,7 @@ import { defineNuxtConfig } from "nuxt3";
 
 export default defineNuxtConfig({
   nitro: {
-    preset: "server",
+    preset: "client",
   },
   css: ["assets/css/tailwind.css"],
   build: {
