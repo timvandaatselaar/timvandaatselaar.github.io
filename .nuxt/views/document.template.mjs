@@ -7,13 +7,7 @@ export default (params) => `<!DOCTYPE html>
 
 <body ${params.BODY_ATTRS}>
   ${params.APP}
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/sw.js');
-  });
-}
-</script></body>
+</body>
 
 </html>
 `

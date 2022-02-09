@@ -4,6 +4,8 @@ export default defineNuxtConfig({
   nitro: {
     preset: "browser",
   },
+  target: "static",
+  ssr: false,
   router: {
     base: "/",
   },
@@ -15,8 +17,5 @@ export default defineNuxtConfig({
     postcss: {
       postcssOptions: require("./postcss.config.js"),
     },
-  },
-  router: {
-    base: "/your-github-repository-name/",
   },
 });
