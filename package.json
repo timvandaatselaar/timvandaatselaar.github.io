@@ -11,7 +11,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.2",
     "gh-pages": "^3.2.3",
-    "nuxt3": "latest",
+    "nuxt": "^3.0.0-rc.1",
     "postcss": "^8.4.5",
     "prettier": "^2.5.1",
     "prettier-plugin-tailwindcss": "^0.1.4",

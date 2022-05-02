@@ -1,17 +1,12 @@
-import { defineNuxtConfig } from "nuxt3";
+import { defineNuxtConfig } from "nuxt";
 
 export default defineNuxtConfig({
   nitro: {
-    preset: "browser",
+    preset: "node",
   },
   target: "static",
   ssr: false,
-  router: {
-    base: "/",
-  },
-  vite: {
-    logLevel: "info",
-  },
+  generate: { crawler: true },
   css: ["assets/css/tailwind.css"],
   build: {
     postcss: {
