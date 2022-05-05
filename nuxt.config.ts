@@ -4,7 +4,6 @@ export default defineNuxtConfig({
   nitro: {
     preset: "node",
   },
-  target: "static",
   ssr: false,
   generate: { crawler: true },
   css: ["assets/css/tailwind.css"],

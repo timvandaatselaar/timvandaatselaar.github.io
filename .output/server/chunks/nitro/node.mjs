@@ -103,7 +103,7 @@ const defaultCacheOptions = {
   name: "_",
   base: "/cache",
   swr: true,
-  magAge: 1
+  maxAge: 1
 };
 function defineCachedFunction(fn, opts) {
   opts = { ...defaultCacheOptions, ...opts };
@@ -114,7 +114,7 @@ function defineCachedFunction(fn, opts) {
   async function get(key, resolver) {
     const cacheKey = [opts.base, group, name, key].filter(Boolean).join(":").replace(/:\/$/, ":index");
     const entry = await useStorage().getItem(cacheKey) || {};
-    const ttl = (opts.magAge ?? opts.magAge ?? 0) * 1e3;
+    const ttl = (opts.maxAge ?? opts.maxAge ?? 0) * 1e3;
     if (ttl) {
       entry.expires = Date.now() + ttl;
     }
@@ -195,16 +195,16 @@ function defineCachedEventHandler(handler, opts = defaultCacheOptions) {
     headers["Last-Modified"] = new Date().toUTCString();
     const cacheControl = [];
     if (opts.swr) {
-      if (opts.magAge) {
-        cacheControl.push(`s-maxage=${opts.magAge}`);
+      if (opts.maxAge) {
+        cacheControl.push(`s-maxage=${opts.maxAge}`);
       }
       if (opts.staleMaxAge) {
         cacheControl.push(`stale-while-revalidate=${opts.staleMaxAge}`);
       } else {
         cacheControl.push("stale-while-revalidate");
       }
-    } else if (opts.magAge) {
-      cacheControl.push(`max-age=${opts.magAge}`);
+    } else if (opts.maxAge) {
+      cacheControl.push(`max-age=${opts.maxAge}`);
     }
     if (cacheControl.length) {
       headers["Cache-Control"] = cacheControl.join(", ");
@@ -224,7 +224,7 @@ function defineCachedEventHandler(handler, opts = defaultCacheOptions) {
     if (handleCacheHeaders(event, {
       modifiedTime: new Date(response.headers["Last-Modified"]),
       etag: response.headers.etag,
-      maxAge: opts.magAge
+      maxAge: opts.maxAge
     })) {
       return;
     }
@@ -292,7 +292,8 @@ const errorHandler = (async function errorhandler(_error, event) {
     statusCode,
     statusMessage,
     message,
-    description: ""
+    description: "",
+    data: _error.data
   };
   event.res.statusCode = errorObject.statusCode;
   event.res.statusMessage = errorObject.statusMessage;

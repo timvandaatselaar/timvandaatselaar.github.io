@@ -17,16 +17,28 @@
     "baseUrl": "..",
     "paths": {
       "~~": [
-        "../timvandaatselaar.github"
+        "."
+      ],
+      "~~/*": [
+        "./*"
       ],
       "@@": [
-        "../timvandaatselaar.github"
+        "."
+      ],
+      "@@/*": [
+        "./*"
       ],
       "~": [
-        "../timvandaatselaar.github"
+        "."
+      ],
+      "~/*": [
+        "./*"
       ],
       "@": [
-        "../timvandaatselaar.github"
+        "."
+      ],
+      "@/*": [
+        "./*"
       ],
       "assets": [
         "assets"

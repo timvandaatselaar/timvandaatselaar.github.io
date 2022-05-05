@@ -8,6 +8,7 @@ import { createHooks } from 'file:///Users/tim/projects/timvandaatselaar.github.
 import { snakeCase } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/scule/dist/index.mjs';
 import { hash } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ohash/dist/index.mjs';
 import { createStorage } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unstorage/dist/index.mjs';
+import _unstorage_drivers_fs from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unstorage/dist/drivers/fs.mjs';
 import { withQuery } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ufo/dist/index.mjs';
 
 const _runtimeConfig = {app:{baseURL:"\u002F",buildAssetsDir:"\u002F_nuxt\u002F",cdnURL:""},nitro:{routes:{},envPrefix:"NUXT_"},public:{}};
@@ -67,31 +68,13 @@ function timingMiddleware(_req, res, next) {
   next();
 }
 
-const _assets = {
+const serverAssets = [{"baseName":"server","dir":"/Users/tim/projects/timvandaatselaar.github.io/server/assets"}];
 
-};
+const assets = createStorage();
 
-function normalizeKey(key) {
-  return key.replace(/[/\\]/g, ":").replace(/^:|:$/g, "");
+for (const asset of serverAssets) {
+  assets.mount(asset.baseName, _unstorage_drivers_fs({ base: asset.dir }));
 }
-
-const assets = {
-  getKeys() {
-    return Promise.resolve(Object.keys(_assets))
-  },
-  hasItem (id) {
-    id = normalizeKey(id);
-    return Promise.resolve(id in _assets)
-  },
-  getItem (id) {
-    id = normalizeKey(id);
-    return Promise.resolve(_assets[id] ? _assets[id].import() : null)
-  },
-  getMeta (id) {
-    id = normalizeKey(id);
-    return Promise.resolve(_assets[id] ? _assets[id].meta : {})
-  }
-};
 
 const storage = createStorage({});
 
@@ -99,11 +82,16 @@ const useStorage = () => storage;
 
 storage.mount('/assets', assets);
 
+storage.mount('root', _unstorage_drivers_fs({"driver":"fs","base":"/Users/tim/projects/timvandaatselaar.github.io"}));
+storage.mount('src', _unstorage_drivers_fs({"driver":"fs","base":"/Users/tim/projects/timvandaatselaar.github.io/server"}));
+storage.mount('build', _unstorage_drivers_fs({"driver":"fs","base":"/Users/tim/projects/timvandaatselaar.github.io/.nuxt"}));
+storage.mount('cache', _unstorage_drivers_fs({"driver":"fs","base":"/Users/tim/projects/timvandaatselaar.github.io/.nuxt/cache"}));
+
 const defaultCacheOptions = {
   name: "_",
   base: "/cache",
   swr: true,
-  magAge: 1
+  maxAge: 1
 };
 function defineCachedFunction(fn, opts) {
   opts = { ...defaultCacheOptions, ...opts };
@@ -114,7 +102,7 @@ function defineCachedFunction(fn, opts) {
   async function get(key, resolver) {
     const cacheKey = [opts.base, group, name, key].filter(Boolean).join(":").replace(/:\/$/, ":index");
     const entry = await useStorage().getItem(cacheKey) || {};
-    const ttl = (opts.magAge ?? opts.magAge ?? 0) * 1e3;
+    const ttl = (opts.maxAge ?? opts.maxAge ?? 0) * 1e3;
     if (ttl) {
       entry.expires = Date.now() + ttl;
     }
@@ -195,16 +183,16 @@ function defineCachedEventHandler(handler, opts = defaultCacheOptions) {
     headers["Last-Modified"] = new Date().toUTCString();
     const cacheControl = [];
     if (opts.swr) {
-      if (opts.magAge) {
-        cacheControl.push(`s-maxage=${opts.magAge}`);
+      if (opts.maxAge) {
+        cacheControl.push(`s-maxage=${opts.maxAge}`);
       }
       if (opts.staleMaxAge) {
         cacheControl.push(`stale-while-revalidate=${opts.staleMaxAge}`);
       } else {
         cacheControl.push("stale-while-revalidate");
       }
-    } else if (opts.magAge) {
-      cacheControl.push(`max-age=${opts.magAge}`);
+    } else if (opts.maxAge) {
+      cacheControl.push(`max-age=${opts.maxAge}`);
     }
     if (cacheControl.length) {
       headers["Cache-Control"] = cacheControl.join(", ");
@@ -224,7 +212,7 @@ function defineCachedEventHandler(handler, opts = defaultCacheOptions) {
     if (handleCacheHeaders(event, {
       modifiedTime: new Date(response.headers["Last-Modified"]),
       etag: response.headers.etag,
-      maxAge: opts.magAge
+      maxAge: opts.maxAge
     })) {
       return;
     }
@@ -292,7 +280,8 @@ const errorHandler = (async function errorhandler(_error, event) {
     statusCode,
     statusMessage,
     message,
-    description: ""
+    description: "",
+    data: _error.data
   };
   event.res.statusCode = errorObject.statusCode;
   event.res.statusMessage = errorObject.statusMessage;

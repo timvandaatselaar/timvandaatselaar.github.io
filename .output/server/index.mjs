@@ -1,5 +1,5 @@
-import 'unenv/runtime/polyfill/fetch.node';
 export { h as handler } from './chunks/nitro/node.mjs';
+import 'unenv/runtime/polyfill/fetch.node';
 import 'h3';
 import 'ohmyfetch';
 import 'destr';
