@@ -1,15 +1,19 @@
-import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/node-fetch-native/dist/polyfill.mjs';
-import { defineEventHandler, handleCacheHeaders, createEvent, createApp, createRouter, lazyEventHandler } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/h3/dist/index.mjs';
-import { createFetch as createFetch$1, Headers } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ohmyfetch/dist/node.mjs';
-import destr from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/destr/dist/index.mjs';
-import { createRouter as createRouter$1 } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/radix3/dist/index.mjs';
-import { createCall, createFetch } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unenv/runtime/fetch/index.mjs';
-import { createHooks } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/hookable/dist/index.mjs';
-import { snakeCase } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/scule/dist/index.mjs';
-import { hash } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ohash/dist/index.mjs';
-import { parseURL, withQuery } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ufo/dist/index.mjs';
-import { createStorage } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unstorage/dist/drivers/fs.mjs';
+globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import 'node-fetch-native/polyfill';
+import { Server as Server$1 } from 'http';
+import { Server } from 'https';
+import destr from 'destr';
+import { defineEventHandler, handleCacheHeaders, createEvent, eventHandler, createError, createApp, createRouter, lazyEventHandler } from 'h3';
+import { createFetch as createFetch$1, Headers } from 'ohmyfetch';
+import { createRouter as createRouter$1 } from 'radix3';
+import { createCall, createFetch } from 'unenv/runtime/fetch/index';
+import { createHooks } from 'hookable';
+import { snakeCase } from 'scule';
+import { hash } from 'ohash';
+import { parseURL, withQuery, withLeadingSlash, withoutTrailingSlash, joinURL } from 'ufo';
+import { createStorage } from 'unstorage';
+import { promises } from 'fs';
+import { dirname, resolve } from 'pathe';
+import { fileURLToPath } from 'url';
 
 const _runtimeConfig = {"app":{"baseURL":"/","buildAssetsDir":"/_nuxt/","cdnURL":""},"nitro":{"routes":{},"envPrefix":"NUXT_"},"public":{}};
 const ENV_PREFIX = "NITRO_";
@@ -68,24 +72,40 @@ function timingMiddleware(_req, res, next) {
   next();
 }
 
-const serverAssets = [{"baseName":"server","dir":"/Users/tim/projects/timvandaatselaar.github.io/server/assets"}];
+const _assets = {
 
-const assets = createStorage();
+};
 
-for (const asset of serverAssets) {
-  assets.mount(asset.baseName, unstorage_47drivers_47fs({ base: asset.dir }));
+function normalizeKey(key) {
+  if (!key) {
+    return "";
+  }
+  return key.replace(/[/\\]/g, ":").replace(/:+/g, ":").replace(/^:|:$/g, "");
 }
+
+const assets$1 = {
+  getKeys() {
+    return Promise.resolve(Object.keys(_assets))
+  },
+  hasItem (id) {
+    id = normalizeKey(id);
+    return Promise.resolve(id in _assets)
+  },
+  getItem (id) {
+    id = normalizeKey(id);
+    return Promise.resolve(_assets[id] ? _assets[id].import() : null)
+  },
+  getMeta (id) {
+    id = normalizeKey(id);
+    return Promise.resolve(_assets[id] ? _assets[id].meta : {})
+  }
+};
 
 const storage = createStorage({});
 
 const useStorage = () => storage;
 
-storage.mount('/assets', assets);
-
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","base":"/Users/tim/projects/timvandaatselaar.github.io","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","base":"/Users/tim/projects/timvandaatselaar.github.io/server","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","base":"/Users/tim/projects/timvandaatselaar.github.io/.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","base":"/Users/tim/projects/timvandaatselaar.github.io/.nuxt/cache","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('/assets', assets$1);
 
 const defaultCacheOptions = {
   name: "_",
@@ -317,9 +337,170 @@ const errorHandler = (async function errorhandler(error, event) {
   event.res.end(html);
 });
 
-const _lazy_OWyOmC = () => import('../renderer.mjs');
+const assets = {
+  "/.DS_Store": {
+    "type": "text/plain; charset=utf-8",
+    "etag": "\"1804-k7VuSl6DIE/FHSzY7fdNontHlno\"",
+    "mtime": "2022-09-15T12:03:33.179Z",
+    "size": 6148,
+    "path": "../public/.DS_Store"
+  },
+  "/favicon.png": {
+    "type": "image/png",
+    "etag": "\"19ae-lECRF+wqCWXGCDagIzE5T1k+zFc\"",
+    "mtime": "2022-09-15T12:03:33.174Z",
+    "size": 6574,
+    "path": "../public/favicon.png"
+  },
+  "/_nuxt/entry.a45ece20.js": {
+    "type": "application/javascript",
+    "etag": "\"1df95-3GA9l082wlSVZqJUvL18VpvsncM\"",
+    "mtime": "2022-09-15T12:03:33.164Z",
+    "size": 122773,
+    "path": "../public/_nuxt/entry.a45ece20.js"
+  },
+  "/_nuxt/entry.cdcb98fd.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"1217-6nfsgOmUPSaFF6vlZzsrw1MjESs\"",
+    "mtime": "2022-09-15T12:03:33.163Z",
+    "size": 4631,
+    "path": "../public/_nuxt/entry.cdcb98fd.css"
+  },
+  "/_nuxt/error-404.038852b3.js": {
+    "type": "application/javascript",
+    "etag": "\"8ad-deG8VBXNFUGOd2dWC1Wd++9lxH8\"",
+    "mtime": "2022-09-15T12:03:33.161Z",
+    "size": 2221,
+    "path": "../public/_nuxt/error-404.038852b3.js"
+  },
+  "/_nuxt/error-404.18ced855.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"e2e-F8gJ3uSz6Dg2HRyb374Ax3RegKE\"",
+    "mtime": "2022-09-15T12:03:33.160Z",
+    "size": 3630,
+    "path": "../public/_nuxt/error-404.18ced855.css"
+  },
+  "/_nuxt/error-500.e60962de.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"79e-VhleGjkSRH7z4cQDJV3dxcboMhU\"",
+    "mtime": "2022-09-15T12:03:33.158Z",
+    "size": 1950,
+    "path": "../public/_nuxt/error-500.e60962de.css"
+  },
+  "/_nuxt/error-500.f7095288.js": {
+    "type": "application/javascript",
+    "etag": "\"751-eFFvROyMQKkc8mG29J0/GvgfLN4\"",
+    "mtime": "2022-09-15T12:03:33.157Z",
+    "size": 1873,
+    "path": "../public/_nuxt/error-500.f7095288.js"
+  },
+  "/_nuxt/error-component.f1678c62.js": {
+    "type": "application/javascript",
+    "etag": "\"465-5hXFjuQkY3x6Uw6GSENwhaSGsks\"",
+    "mtime": "2022-09-15T12:03:33.148Z",
+    "size": 1125,
+    "path": "../public/_nuxt/error-component.f1678c62.js"
+  },
+  "/_nuxt/index.54f4d025.js": {
+    "type": "application/javascript",
+    "etag": "\"516-M7d8sUNVHScHDGeo8pBN+ej1wdU\"",
+    "mtime": "2022-09-15T12:03:33.146Z",
+    "size": 1302,
+    "path": "../public/_nuxt/index.54f4d025.js"
+  }
+};
+
+function readAsset (id) {
+  const serverDir = dirname(fileURLToPath(globalThis._importMeta_.url));
+  return promises.readFile(resolve(serverDir, assets[id].path))
+}
+
+const publicAssetBases = [];
+
+function isPublicAssetURL(id = '') {
+  if (assets[id]) {
+    return true
+  }
+  for (const base of publicAssetBases) {
+    if (id.startsWith(base)) { return true }
+  }
+  return false
+}
+
+function getAsset (id) {
+  return assets[id]
+}
+
+const METHODS = ["HEAD", "GET"];
+const EncodingMap = { gzip: ".gz", br: ".br" };
+const _f4b49z = eventHandler(async (event) => {
+  if (event.req.method && !METHODS.includes(event.req.method)) {
+    return;
+  }
+  let id = decodeURIComponent(withLeadingSlash(withoutTrailingSlash(parseURL(event.req.url).pathname)));
+  let asset;
+  const encodingHeader = String(event.req.headers["accept-encoding"] || "");
+  const encodings = encodingHeader.split(",").map((e) => EncodingMap[e.trim()]).filter(Boolean).sort().concat([""]);
+  if (encodings.length > 1) {
+    event.res.setHeader("Vary", "Accept-Encoding");
+  }
+  for (const encoding of encodings) {
+    for (const _id of [id + encoding, joinURL(id, "index.html" + encoding)]) {
+      const _asset = getAsset(_id);
+      if (_asset) {
+        asset = _asset;
+        id = _id;
+        break;
+      }
+    }
+  }
+  if (!asset) {
+    if (isPublicAssetURL(id)) {
+      throw createError({
+        statusMessage: "Cannot find static asset " + id,
+        statusCode: 404
+      });
+    }
+    return;
+  }
+  const ifNotMatch = event.req.headers["if-none-match"] === asset.etag;
+  if (ifNotMatch) {
+    event.res.statusCode = 304;
+    event.res.end("Not Modified (etag)");
+    return;
+  }
+  const ifModifiedSinceH = event.req.headers["if-modified-since"];
+  if (ifModifiedSinceH && asset.mtime) {
+    if (new Date(ifModifiedSinceH) >= new Date(asset.mtime)) {
+      event.res.statusCode = 304;
+      event.res.end("Not Modified (mtime)");
+      return;
+    }
+  }
+  if (asset.type) {
+    event.res.setHeader("Content-Type", asset.type);
+  }
+  if (asset.etag) {
+    event.res.setHeader("ETag", asset.etag);
+  }
+  if (asset.mtime) {
+    event.res.setHeader("Last-Modified", asset.mtime);
+  }
+  if (asset.encoding) {
+    event.res.setHeader("Content-Encoding", asset.encoding);
+  }
+  if (asset.size) {
+    event.res.setHeader("Content-Length", asset.size);
+  }
+  const contents = await readAsset(id);
+  event.res.end(contents);
+});
+
+const _lazy_OWyOmC = () => import('../handlers/renderer.mjs');
 
 const handlers = [
+  { route: '', handler: _f4b49z, lazy: false, middleware: true, method: undefined },
+  { route: '/__nuxt_error', handler: _lazy_OWyOmC, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_OWyOmC, lazy: true, middleware: false, method: undefined }
 ];
 
@@ -369,11 +550,27 @@ function createNitroApp() {
 const nitroApp = createNitroApp();
 const useNitroApp = () => nitroApp;
 
-const localFetch = nitroApp.localFetch;
+const cert = process.env.NITRO_SSL_CERT;
+const key = process.env.NITRO_SSL_KEY;
+const server = cert && key ? new Server({ key, cert }, nitroApp.h3App.nodeHandler) : new Server$1(nitroApp.h3App.nodeHandler);
+const port = destr(process.env.NITRO_PORT || process.env.PORT) || 3e3;
+const host = process.env.NITRO_HOST || process.env.HOST;
+const s = server.listen({ host, port }, (err) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  const protocol = cert && key ? "https" : "http";
+  const i = s.address();
+  const baseURL = (useRuntimeConfig().app.baseURL || "").replace(/\/$/, "");
+  const url = `${protocol}://${i.family === "IPv6" ? `[${i.address}]` : i.address}:${i.port}${baseURL}`;
+  console.log(`Listening ${url}`);
+});
 {
   process.on("unhandledRejection", (err) => console.error("[nitro] [dev] [unhandledRejection] " + err));
   process.on("uncaughtException", (err) => console.error("[nitro] [dev] [uncaughtException] " + err));
 }
+const nodeServer = {};
 
-export { useRuntimeConfig as a, localFetch as l, useNitroApp as u };
-//# sourceMappingURL=nitro-prerenderer.mjs.map
+export { useRuntimeConfig as a, nodeServer as n, useNitroApp as u };
+//# sourceMappingURL=node-server.mjs.map
