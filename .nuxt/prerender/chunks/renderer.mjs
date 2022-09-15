@@ -1,22 +1,18 @@
-import { createRenderer } from 'vue-bundle-renderer/runtime';
-import { eventHandler, getQuery } from 'h3';
-import { renderToString } from 'vue/server-renderer';
-import { joinURL } from 'ufo';
-import { u as useNitroApp, a as useRuntimeConfig } from '../nitro/node-server.mjs';
-import 'node-fetch-native/polyfill';
-import 'http';
-import 'https';
-import 'destr';
-import 'ohmyfetch';
-import 'radix3';
-import 'unenv/runtime/fetch/index';
-import 'hookable';
-import 'scule';
-import 'ohash';
-import 'unstorage';
-import 'fs';
-import 'pathe';
-import 'url';
+import { createRenderer } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { eventHandler, getQuery, appendHeader } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/h3/dist/index.mjs';
+import { joinURL } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ufo/dist/index.mjs';
+import { renderToString } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/vue/server-renderer/index.mjs';
+import { u as useNitroApp, a as useRuntimeConfig } from './nitro/nitro-prerenderer.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/node-fetch-native/dist/polyfill.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ohmyfetch/dist/node.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/destr/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/radix3/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unenv/runtime/fetch/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/hookable/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/scule/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ohash/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unstorage/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unstorage/dist/drivers/fs.mjs';
 
 function defineRenderHandler(handler) {
   return eventHandler(async (event) => {
@@ -293,9 +289,9 @@ function publicAssetsURL(...path) {
   return path.length ? joinURL(publicBase, ...path) : publicBase;
 }
 
-const getClientManifest = () => import('../app/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
-const getServerEntry = () => import('../app/server.mjs').then((r) => r.default || r);
-const getSSRStyles = () => import('../app/styles.mjs').then((r) => r.default || r);
+const getClientManifest = () => import('./app/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
+const getServerEntry = () => import('./app/server.mjs').then((r) => r.default || r);
+const getSSRStyles = () => import('./app/styles.mjs').then((r) => r.default || r);
 const getSSRRenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();
   if (!manifest) {
@@ -343,7 +339,9 @@ const getSPARenderer = lazyCachedFunction(async () => {
   };
   return { renderToString };
 });
+const PAYLOAD_CACHE = /* @__PURE__ */ new Map() ;
 const PAYLOAD_URL_RE = /\/_payload(\.[a-zA-Z0-9]+)?.js(\?.*)?$/;
+const NO_SSR_ROUTES = /* @__PURE__ */ new Set(["/index.html", "/200.html", "/404.html"]);
 const renderer = defineRenderHandler(async (event) => {
   const ssrError = event.req.url?.startsWith("/__nuxt_error") ? getQuery(event) : null;
   let url = ssrError?.url || event.req.url;
@@ -351,6 +349,9 @@ const renderer = defineRenderHandler(async (event) => {
   if (isRenderingPayload) {
     url = url.substring(0, url.lastIndexOf("/")) || "/";
     event.req.url = url;
+    if (PAYLOAD_CACHE.has(url)) {
+      return PAYLOAD_CACHE.get(url);
+    }
   }
   const ssrContext = {
     url,
@@ -358,11 +359,15 @@ const renderer = defineRenderHandler(async (event) => {
     req: event.req,
     res: event.res,
     runtimeConfig: useRuntimeConfig(),
-    noSSR: !!event.req.headers["x-nuxt-no-ssr"] || (false),
+    noSSR: !!event.req.headers["x-nuxt-no-ssr"] || (NO_SSR_ROUTES.has(url) ),
     error: !!ssrError,
     nuxt: void 0,
     payload: ssrError ? { error: ssrError } : {}
   };
+  const payloadURL = joinURL(url, "_payload.js") ;
+  {
+    ssrContext.payload.prerenderedAt = Date.now();
+  }
   const renderer = ssrContext.noSSR ? await getSPARenderer() : await getSSRRenderer();
   const _rendered = await renderer.renderToString(ssrContext).catch((err) => {
     if (!ssrError) {
@@ -378,7 +383,14 @@ const renderer = defineRenderHandler(async (event) => {
   }
   if (isRenderingPayload) {
     const response2 = renderPayloadResponse(ssrContext);
+    {
+      PAYLOAD_CACHE.set(url, response2);
+    }
     return response2;
+  }
+  {
+    appendHeader(event, "x-nitro-prerender", payloadURL);
+    PAYLOAD_CACHE.set(url, renderPayloadResponse(ssrContext));
   }
   const renderedMeta = await ssrContext.renderMeta?.() ?? {};
   const inlinedStyles = await renderInlineStyles(ssrContext.modules ?? ssrContext._registeredComponents ?? []) ;
@@ -386,7 +398,7 @@ const renderer = defineRenderHandler(async (event) => {
     htmlAttrs: normalizeChunks([renderedMeta.htmlAttrs]),
     head: normalizeChunks([
       renderedMeta.headTags,
-      null,
+      `<link rel="modulepreload" href="${payloadURL}">` ,
       _rendered.renderResourceHints(),
       _rendered.renderStyles(),
       inlinedStyles,
@@ -401,7 +413,7 @@ const renderer = defineRenderHandler(async (event) => {
       _rendered.html
     ],
     bodyAppend: normalizeChunks([
-      `<script>window.__NUXT__=${devalue(ssrContext.payload)}<\/script>`,
+      `<script type="module">import p from "${payloadURL}";window.__NUXT__={...p,...(${devalue(splitPayload(ssrContext).initial)})}<\/script>` ,
       _rendered.renderScripts(),
       renderedMeta.bodyScripts
     ])

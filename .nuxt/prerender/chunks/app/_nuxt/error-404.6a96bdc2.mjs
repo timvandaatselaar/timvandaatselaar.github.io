@@ -1,27 +1,23 @@
 import { _ as _export_sfc, u as useHead, a as __nuxt_component_0 } from '../server.mjs';
-import { mergeProps, withCtx, createTextVNode, toDisplayString, useSSRContext } from 'vue';
-import { ssrRenderAttrs, ssrInterpolate, ssrRenderComponent } from 'vue/server-renderer';
-import 'ohmyfetch';
-import 'ufo';
-import 'hookable';
-import 'unctx';
-import 'vue-router';
-import 'h3';
-import 'defu';
-import '@vue/shared';
-import '../../nitro/node-server.mjs';
-import 'node-fetch-native/polyfill';
-import 'http';
-import 'https';
-import 'destr';
-import 'radix3';
-import 'unenv/runtime/fetch/index';
-import 'scule';
-import 'ohash';
-import 'unstorage';
-import 'fs';
-import 'pathe';
-import 'url';
+import { mergeProps, withCtx, createTextVNode, toDisplayString, useSSRContext } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/vue/index.mjs';
+import { ssrRenderAttrs, ssrInterpolate, ssrRenderComponent } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/vue/server-renderer/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ohmyfetch/dist/node.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ufo/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/hookable/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unctx/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/vue-router/dist/vue-router.node.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/h3/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/defu/dist/defu.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/@vue/shared/index.js';
+import '../../nitro/nitro-prerenderer.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/node-fetch-native/dist/polyfill.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/destr/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/radix3/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unenv/runtime/fetch/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/scule/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ohash/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unstorage/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unstorage/dist/drivers/fs.mjs';
 
 const _sfc_main = {
   __name: "error-404",
