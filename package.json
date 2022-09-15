@@ -6,7 +6,7 @@
     "predeploy": "nuxi build",
     "deploy": "gh-pages -d .output/public",
     "start": "node .output/server/index.mjs",
-    "generate": "export NITRO_PRESET=browser && npm run build"
+    "generate": "npx nuxi generate"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
