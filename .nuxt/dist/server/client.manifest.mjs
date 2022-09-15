@@ -6,11 +6,10 @@ export default {
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "dynamicImports": [
-      "virtual:nuxt:/Users/tim/projects/timvandaatselaar.github.io/.nuxt/error-component.mjs"
+      "virtual:nuxt:/Users/tim/projects/timvandaatselaar.github.io/.nuxt/error-component.mjs",
+      "node_modules/nuxt/dist/app/entry.mjs-css"
     ],
-    "css": [
-      "entry.cdcb98fd.css"
-    ]
+    "css": []
   },
   "entry.cdcb98fd.css": {
     "file": "entry.cdcb98fd.css",
@@ -49,9 +48,7 @@ export default {
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
     ],
-    "css": [
-      "error-404.18ced855.css"
-    ]
+    "css": []
   },
   "error-404.18ced855.css": {
     "file": "error-404.18ced855.css",
@@ -66,13 +63,16 @@ export default {
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
     ],
-    "css": [
-      "error-500.e60962de.css"
-    ]
+    "css": []
   },
   "error-500.e60962de.css": {
     "file": "error-500.e60962de.css",
     "resourceType": "style"
+  },
+  "node_modules/@nuxt/ui-templates/dist/templates/error-500.css": {
+    "resourceType": "style",
+    "file": "error-500.e60962de.css",
+    "src": "node_modules/@nuxt/ui-templates/dist/templates/error-500.css"
   },
   "node_modules/@nuxt/ui-templates/dist/templates/error-404.css": {
     "resourceType": "style",
@@ -84,9 +84,10 @@ export default {
     "file": "entry.cdcb98fd.css",
     "src": "node_modules/nuxt/dist/app/entry.css"
   },
-  "node_modules/@nuxt/ui-templates/dist/templates/error-500.css": {
-    "resourceType": "style",
-    "file": "error-500.e60962de.css",
-    "src": "node_modules/@nuxt/ui-templates/dist/templates/error-500.css"
+  "node_modules/nuxt/dist/app/entry.mjs-css": {
+    "file": "",
+    "css": [
+      "entry.cdcb98fd.css"
+    ]
   }
 }

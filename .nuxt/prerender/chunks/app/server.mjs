@@ -1,15 +1,23 @@
-import { getCurrentInstance, reactive, toRef, isRef, inject, defineComponent, computed, ref, h, resolveComponent, shallowRef, unref, watchEffect, markRaw, provide, Suspense, Transition, defineAsyncComponent, onErrorCaptured, useSSRContext, mergeProps, createApp } from "vue";
-import { $fetch } from "ohmyfetch";
-import { joinURL, hasProtocol, parseURL, isEqual } from "ufo";
-import { useRuntimeConfig as useRuntimeConfig$1 } from "#internal/nitro";
-import { createHooks } from "hookable";
-import { getContext, executeAsync } from "unctx";
-import { RouterView, createMemoryHistory, createRouter } from "vue-router";
-import "destr";
-import { createError as createError$1, sendRedirect } from "h3";
-import defu, { defuFn } from "defu";
-import { isFunction } from "@vue/shared";
-import { ssrRenderSuspense, ssrRenderComponent, ssrRenderAttrs } from "vue/server-renderer";
+import { computed, defineComponent, inject, provide, h, Suspense, Transition, reactive, getCurrentInstance, ref, resolveComponent, watchEffect, markRaw, shallowRef, useSSRContext, createApp, toRef, isRef, defineAsyncComponent, onErrorCaptured, unref, mergeProps } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/vue/index.mjs';
+import { $fetch } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ohmyfetch/dist/node.mjs';
+import { joinURL, hasProtocol, isEqual, parseURL } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ufo/dist/index.mjs';
+import { createHooks } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/hookable/dist/index.mjs';
+import { getContext, executeAsync } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unctx/dist/index.mjs';
+import { RouterView, createMemoryHistory, createRouter } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/vue-router/dist/vue-router.node.mjs';
+import { createError as createError$1, sendRedirect } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/h3/dist/index.mjs';
+import defu, { defuFn } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/defu/dist/defu.mjs';
+import { isFunction } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/@vue/shared/index.js';
+import { ssrRenderSuspense, ssrRenderComponent, ssrRenderAttrs } from 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/vue/server-renderer/index.mjs';
+import { a as useRuntimeConfig$1 } from '../nitro/nitro-prerenderer.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/node-fetch-native/dist/polyfill.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/destr/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/radix3/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unenv/runtime/fetch/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/scule/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/ohash/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unstorage/dist/index.mjs';
+import 'file:///Users/tim/projects/timvandaatselaar.github.io/node_modules/unstorage/dist/drivers/fs.mjs';
+
 const appConfig = useRuntimeConfig$1().app;
 const baseURL = () => appConfig.baseURL;
 const buildAssetsDir = () => appConfig.buildAssetsDir;
@@ -374,7 +382,6 @@ function useHead(meta2) {
   const resolvedMeta = isFunction(meta2) ? computed(meta2) : meta2;
   useNuxtApp()._useHead(resolvedMeta);
 }
-const tailwind = "";
 const components = {};
 const _nuxt_components_plugin_mjs_KR1HBZs4kY = defineNuxtPlugin((nuxtApp) => {
   for (const name in components) {
@@ -1147,8 +1154,8 @@ const _routes = [
     file: "/Users/tim/projects/timvandaatselaar.github.io/pages/index.vue",
     children: [],
     meta,
-    alias: (meta == null ? void 0 : meta.alias) || [],
-    component: () => import("./_nuxt/index.73e83182.js").then((m) => m.default || m)
+    alias: [],
+    component: () => import('./_nuxt/index.73e83182.mjs').then((m) => m.default || m)
   }
 ];
 const configRouterOptions = {};
@@ -1297,7 +1304,7 @@ const _sfc_main$1 = {
   __name: "nuxt-root",
   __ssrInlineRender: true,
   setup(__props) {
-    const ErrorComponent = defineAsyncComponent(() => import("./_nuxt/error-component.b2d78629.js").then((r) => r.default || r));
+    const ErrorComponent = defineAsyncComponent(() => import('./_nuxt/error-component.b2d78629.mjs').then((r) => r.default || r));
     const nuxtApp = useNuxtApp();
     provide("_route", useRoute());
     nuxtApp.hooks.callHookWith((hooks) => hooks.map((hook) => hook()), "vue:setup");
@@ -1373,10 +1380,6 @@ const plugins = normalizePlugins(_plugins);
   };
 }
 const entry$1 = (ctx) => entry(ctx);
-export {
-  _export_sfc as _,
-  __nuxt_component_0 as a,
-  entry$1 as default,
-  useHead as u
-};
+
+export { _export_sfc as _, __nuxt_component_0 as a, entry$1 as default, useHead as u };
 //# sourceMappingURL=server.mjs.map
