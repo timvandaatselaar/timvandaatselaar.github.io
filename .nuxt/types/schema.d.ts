@@ -4,14 +4,15 @@ declare module '@nuxt/schema' {
     ["telemetry"]?: typeof import("@nuxt/telemetry").default extends NuxtModule<infer O> ? Partial<O> : Record<string, any>
   }
   interface RuntimeConfig {
-     public: any,
-
-    app: {
+     app: {
         baseURL: string,
 
         buildAssetsDir: string,
 
         cdnURL: string,
     },
+  }
+  interface PublicRuntimeConfig {
+  
   }
 }

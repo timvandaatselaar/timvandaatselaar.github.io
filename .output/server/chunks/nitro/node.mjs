@@ -1,5 +1,5 @@
-import 'unenv/runtime/polyfill/fetch.node';
-import { toEventHandler, defineEventHandler, handleCacheHeaders, createEvent, createApp, createRouter, lazyEventHandler } from 'h3';
+import 'node-fetch-native/polyfill';
+import { defineEventHandler, handleCacheHeaders, createEvent, createApp, createRouter, lazyEventHandler } from 'h3';
 import { createFetch as createFetch$1, Headers } from 'ohmyfetch';
 import destr from 'destr';
 import { createRouter as createRouter$1 } from 'radix3';
@@ -7,10 +7,10 @@ import { createCall, createFetch } from 'unenv/runtime/fetch/index';
 import { createHooks } from 'hookable';
 import { snakeCase } from 'scule';
 import { hash } from 'ohash';
+import { parseURL, withQuery } from 'ufo';
 import { createStorage } from 'unstorage';
-import { withQuery } from 'ufo';
 
-const _runtimeConfig = {app:{baseURL:"\u002F",buildAssetsDir:"\u002F_nuxt\u002F",cdnURL:""},nitro:{routes:{},envPrefix:"NUXT_"},public:{}};
+const _runtimeConfig = {"app":{"baseURL":"/","buildAssetsDir":"/_nuxt/","cdnURL":""},"nitro":{"routes":{},"envPrefix":"NUXT_"},"public":{}};
 const ENV_PREFIX = "NITRO_";
 const ENV_PREFIX_ALT = _runtimeConfig.nitro.envPrefix ?? process.env.NITRO_ENV_PREFIX ?? "_";
 const getEnv = (key) => {
@@ -72,7 +72,10 @@ const _assets = {
 };
 
 function normalizeKey(key) {
-  return key.replace(/[/\\]/g, ":").replace(/^:|:$/g, "");
+  if (!key) {
+    return "";
+  }
+  return key.replace(/[/\\]/g, ":").replace(/:+/g, ":").replace(/^:|:$/g, "");
 }
 
 const assets = {
@@ -112,7 +115,7 @@ function defineCachedFunction(fn, opts) {
   const name = opts.name || fn.name || "_";
   const integrity = hash([opts.integrity, fn, opts]);
   async function get(key, resolver) {
-    const cacheKey = [opts.base, group, name, key].filter(Boolean).join(":").replace(/:\/$/, ":index");
+    const cacheKey = [opts.base, group, name, key + ".json"].filter(Boolean).join(":").replace(/:\/$/, ":index");
     const entry = await useStorage().getItem(cacheKey) || {};
     const ttl = (opts.maxAge ?? opts.maxAge ?? 0) * 1e3;
     if (ttl) {
@@ -121,6 +124,10 @@ function defineCachedFunction(fn, opts) {
     const expired = entry.integrity !== integrity || ttl && Date.now() - (entry.mtime || 0) > ttl;
     const _resolve = async () => {
       if (!pending[key]) {
+        entry.value = void 0;
+        entry.integrity = void 0;
+        entry.mtime = void 0;
+        entry.expires = void 0;
         pending[key] = Promise.resolve(resolver());
       }
       entry.value = await pending[key];
@@ -154,7 +161,10 @@ function defineCachedEventHandler(handler, opts = defaultCacheOptions) {
   const _opts = {
     ...opts,
     getKey: (event) => {
-      return event.req.originalUrl || event.req.url;
+      const url = event.req.originalUrl || event.req.url;
+      const friendlyName = decodeURI(parseURL(url).pathname).replace(/[^a-zA-Z0-9]/g, "").substring(0, 16);
+      const urlHash = hash(url);
+      return `${friendlyName}.${urlHash}`;
     },
     group: opts.group || "nitro/handlers",
     integrity: [
@@ -162,7 +172,6 @@ function defineCachedEventHandler(handler, opts = defaultCacheOptions) {
       handler
     ]
   };
-  const _handler = toEventHandler(handler);
   const _cachedHandler = cachedFunction(async (incomingEvent) => {
     const reqProxy = cloneWithProxy(incomingEvent.req, { headers: {} });
     const resHeaders = {};
@@ -189,7 +198,8 @@ function defineCachedEventHandler(handler, opts = defaultCacheOptions) {
       }
     });
     const event = createEvent(reqProxy, resProxy);
-    const body = await _handler(event);
+    event.context = incomingEvent.context;
+    const body = await handler(event);
     const headers = event.res.getHeaders();
     headers.Etag = `W/"${hash(body)}"`;
     headers["Last-Modified"] = new Date().toUTCString();
@@ -285,40 +295,48 @@ function normalizeError(error) {
   };
 }
 
-const errorHandler = (async function errorhandler(_error, event) {
-  const { stack, statusCode, statusMessage, message } = normalizeError(_error);
+const errorHandler = (async function errorhandler(error, event) {
+  const { stack, statusCode, statusMessage, message } = normalizeError(error);
   const errorObject = {
     url: event.req.url,
     statusCode,
     statusMessage,
     message,
-    description: "",
-    data: _error.data
+    stack: "",
+    data: error.data
   };
   event.res.statusCode = errorObject.statusCode;
   event.res.statusMessage = errorObject.statusMessage;
-  if (errorObject.statusCode !== 404) {
-    console.error("[nuxt] [request error]", errorObject.message + "\n" + stack.map((l) => "  " + l.text).join("  \n"));
+  if (error.unhandled || error.fatal) {
+    const tags = [
+      "[nuxt]",
+      "[request error]",
+      error.unhandled && "[unhandled]",
+      error.fatal && "[fatal]",
+      Number(errorObject.statusCode) !== 200 && `[${errorObject.statusCode}]`
+    ].filter(Boolean).join(" ");
+    console.error(tags, errorObject.message + "\n" + stack.map((l) => "  " + l.text).join("  \n"));
   }
   if (isJsonRequest(event)) {
     event.res.setHeader("Content-Type", "application/json");
     event.res.end(JSON.stringify(errorObject));
     return;
   }
-  const url = withQuery("/__nuxt_error", errorObject);
-  const html = await $fetch(url).catch((error) => {
-    console.error("[nitro] Error while generating error response", error);
-    return errorObject.statusMessage;
-  });
+  const isErrorPage = event.req.url?.startsWith("/__nuxt_error");
+  let html = !isErrorPage ? await $fetch(withQuery("/__nuxt_error", errorObject)).catch(() => null) : null;
+  if (!html) {
+    const { template } = await import('../error-500.mjs');
+    html = template(errorObject);
+  }
   event.res.setHeader("Content-Type", "text/html;charset=UTF-8");
   event.res.end(html);
 });
 
-const _711d44 = () => import('../handlers/renderer.mjs');
+const _lazy_OWyOmC = () => import('../handlers/renderer.mjs');
 
 const handlers = [
-  { route: '/__nuxt_error', handler: _711d44, lazy: true, method: undefined },
-  { route: '/**', handler: _711d44, lazy: true, method: undefined }
+  { route: '/__nuxt_error', handler: _lazy_OWyOmC, lazy: true, middleware: false, method: undefined },
+  { route: '/**', handler: _lazy_OWyOmC, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
@@ -340,8 +358,9 @@ function createNitroApp() {
         group: "nitro/routes"
       });
     }
-    if (h.route === "") {
-      h3App.use(config.app.baseURL, handler);
+    if (h.middleware || !h.route) {
+      const middlewareBase = (config.app.baseURL + (h.route || "/")).replace(/\/+/g, "/");
+      h3App.use(middlewareBase, handler);
     } else {
       router.use(h.route, handler, h.method);
     }
@@ -354,6 +373,7 @@ function createNitroApp() {
   const app = {
     hooks,
     h3App,
+    router,
     localCall,
     localFetch
   };
@@ -363,8 +383,13 @@ function createNitroApp() {
   return app;
 }
 const nitroApp = createNitroApp();
+const useNitroApp = () => nitroApp;
 
 const handler = nitroApp.h3App.nodeHandler;
+{
+  process.on("unhandledRejection", (err) => console.error("[nitro] [dev] [unhandledRejection] " + err));
+  process.on("uncaughtException", (err) => console.error("[nitro] [dev] [uncaughtException] " + err));
+}
 
-export { handler as h, useRuntimeConfig as u };
+export { useRuntimeConfig as a, handler as h, useNitroApp as u };
 //# sourceMappingURL=node.mjs.map

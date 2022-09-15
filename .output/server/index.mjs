@@ -1,5 +1,5 @@
+globalThis._importMeta_={url:import.meta.url,env:process.env};import 'node-fetch-native/polyfill';
 export { h as handler } from './chunks/nitro/node.mjs';
-import 'unenv/runtime/polyfill/fetch.node';
 import 'h3';
 import 'ohmyfetch';
 import 'destr';
@@ -8,6 +8,6 @@ import 'unenv/runtime/fetch/index';
 import 'hookable';
 import 'scule';
 import 'ohash';
-import 'unstorage';
 import 'ufo';
+import 'unstorage';
 //# sourceMappingURL=index.mjs.map
