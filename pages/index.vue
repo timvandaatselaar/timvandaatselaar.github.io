@@ -1,7 +1,7 @@
 <template>
   <div class="flex min-h-screen items-center py-20 px-8">
     <div class="mx-auto w-full max-w-5xl">
-      <div class="max-w-xl">
+      <div class="max-w-2xl">
         <p
           class="text-3xl font-semibold leading-snug lg:text-5xl lg:leading-snug"
         >
