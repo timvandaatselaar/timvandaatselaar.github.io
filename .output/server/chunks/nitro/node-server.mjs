@@ -341,63 +341,63 @@ const assets = {
   "/favicon.png": {
     "type": "image/png",
     "etag": "\"19ae-lECRF+wqCWXGCDagIzE5T1k+zFc\"",
-    "mtime": "2023-08-26T09:15:48.603Z",
+    "mtime": "2023-08-26T09:19:41.782Z",
     "size": 6574,
     "path": "../public/favicon.png"
   },
   "/_nuxt/entry.984e080e.css": {
     "type": "text/css; charset=utf-8",
     "etag": "\"1216-y5T10XcZymc6fF7BYDvsi+yP3zw\"",
-    "mtime": "2023-08-26T09:15:48.599Z",
+    "mtime": "2023-08-26T09:19:41.780Z",
     "size": 4630,
     "path": "../public/_nuxt/entry.984e080e.css"
   },
   "/_nuxt/entry.ab9028cd.js": {
     "type": "application/javascript",
     "etag": "\"1df95-Y4PEOEK+cvgdmx8v9vwZ5f/y3T8\"",
-    "mtime": "2023-08-26T09:15:48.598Z",
+    "mtime": "2023-08-26T09:19:41.779Z",
     "size": 122773,
     "path": "../public/_nuxt/entry.ab9028cd.js"
   },
   "/_nuxt/error-404.0bfd6918.js": {
     "type": "application/javascript",
     "etag": "\"8ad-lFEj7gi2ErXN8Q8MSbIVEz4mwMI\"",
-    "mtime": "2023-08-26T09:15:48.597Z",
+    "mtime": "2023-08-26T09:19:41.779Z",
     "size": 2221,
     "path": "../public/_nuxt/error-404.0bfd6918.js"
   },
   "/_nuxt/error-404.18ced855.css": {
     "type": "text/css; charset=utf-8",
     "etag": "\"e2e-F8gJ3uSz6Dg2HRyb374Ax3RegKE\"",
-    "mtime": "2023-08-26T09:15:48.597Z",
+    "mtime": "2023-08-26T09:19:41.778Z",
     "size": 3630,
     "path": "../public/_nuxt/error-404.18ced855.css"
   },
   "/_nuxt/error-500.3cdf3c69.js": {
     "type": "application/javascript",
     "etag": "\"751-OY1gtGh72Cp/Y2ij7upg7SrpYUU\"",
-    "mtime": "2023-08-26T09:15:48.597Z",
+    "mtime": "2023-08-26T09:19:41.778Z",
     "size": 1873,
     "path": "../public/_nuxt/error-500.3cdf3c69.js"
   },
   "/_nuxt/error-500.e60962de.css": {
     "type": "text/css; charset=utf-8",
     "etag": "\"79e-VhleGjkSRH7z4cQDJV3dxcboMhU\"",
-    "mtime": "2023-08-26T09:15:48.596Z",
+    "mtime": "2023-08-26T09:19:41.778Z",
     "size": 1950,
     "path": "../public/_nuxt/error-500.e60962de.css"
   },
   "/_nuxt/error-component.dade3074.js": {
     "type": "application/javascript",
     "etag": "\"465-VN9N6v83h72QdnOxv3tG71ANujw\"",
-    "mtime": "2023-08-26T09:15:48.596Z",
+    "mtime": "2023-08-26T09:19:41.777Z",
     "size": 1125,
     "path": "../public/_nuxt/error-component.dade3074.js"
   },
   "/_nuxt/index.b52dfdc3.js": {
     "type": "application/javascript",
     "etag": "\"514-lOUjEVGpY6B8H90Qo1M6m87FG0Y\"",
-    "mtime": "2023-08-26T09:15:48.596Z",
+    "mtime": "2023-08-26T09:19:41.777Z",
     "size": 1300,
     "path": "../public/_nuxt/index.b52dfdc3.js"
   }
