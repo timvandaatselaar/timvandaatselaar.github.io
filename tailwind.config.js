@@ -7,7 +7,11 @@ module.exports = {
     "./plugins/**/*.{js,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      minHeight: {
+        dvh: "100dvh",
+      },
+    },
   },
   plugins: [],
 };

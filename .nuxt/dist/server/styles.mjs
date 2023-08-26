@@ -1,4 +1,4 @@
-import style_0 from './_nuxt/css-styles-1.mjs.3e04700a.js';
+import style_0 from './_nuxt/css-styles-1.mjs.1415a910.js';
 const interopDefault = r => r.default || r || []
 export default {
   entry: () => [style_0],

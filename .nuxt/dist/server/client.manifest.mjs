@@ -2,7 +2,7 @@ export default {
   "node_modules/nuxt/dist/app/entry.mjs": {
     "resourceType": "script",
     "module": true,
-    "file": "entry.a45ece20.js",
+    "file": "entry.ab9028cd.js",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "dynamicImports": [
@@ -11,14 +11,14 @@ export default {
     ],
     "css": []
   },
-  "entry.cdcb98fd.css": {
-    "file": "entry.cdcb98fd.css",
+  "entry.984e080e.css": {
+    "file": "entry.984e080e.css",
     "resourceType": "style"
   },
   "virtual:nuxt:/Users/tim/projects/timvandaatselaar.github.io/.nuxt/error-component.mjs": {
     "resourceType": "script",
     "module": true,
-    "file": "error-component.f1678c62.js",
+    "file": "error-component.dade3074.js",
     "src": "virtual:nuxt:/Users/tim/projects/timvandaatselaar.github.io/.nuxt/error-component.mjs",
     "isDynamicEntry": true,
     "imports": [
@@ -32,7 +32,7 @@ export default {
   "pages/index.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "index.54f4d025.js",
+    "file": "index.b52dfdc3.js",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -42,7 +42,7 @@ export default {
   "node_modules/@nuxt/ui-templates/dist/templates/error-404.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "error-404.038852b3.js",
+    "file": "error-404.0bfd6918.js",
     "src": "node_modules/@nuxt/ui-templates/dist/templates/error-404.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -57,7 +57,7 @@ export default {
   "node_modules/@nuxt/ui-templates/dist/templates/error-500.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "error-500.f7095288.js",
+    "file": "error-500.3cdf3c69.js",
     "src": "node_modules/@nuxt/ui-templates/dist/templates/error-500.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -71,7 +71,7 @@ export default {
   },
   "node_modules/nuxt/dist/app/entry.css": {
     "resourceType": "style",
-    "file": "entry.cdcb98fd.css",
+    "file": "entry.984e080e.css",
     "src": "node_modules/nuxt/dist/app/entry.css"
   },
   "node_modules/@nuxt/ui-templates/dist/templates/error-404.css": {
@@ -87,7 +87,7 @@ export default {
   "node_modules/nuxt/dist/app/entry.mjs-css": {
     "file": "",
     "css": [
-      "entry.cdcb98fd.css"
+      "entry.984e080e.css"
     ]
   }
 }
