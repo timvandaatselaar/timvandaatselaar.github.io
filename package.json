@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxi dev",
-    "build": "nuxi build",
-    "predeploy": "nuxi build",
+    "build": "nuxi generate",
+    "predeploy": "nuxi generate",
     "deploy": "gh-pages -d .output/public",
     "start": "node .output/server/index.mjs",
     "generate": "npx nuxi generate"

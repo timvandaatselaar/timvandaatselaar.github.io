@@ -1,4 +1,4 @@
-{
+const client_manifest = {
   "node_modules/@nuxt/ui-templates/dist/templates/error-404.css": {
     "resourceType": "style",
     "prefetch": true,
@@ -77,4 +77,7 @@
     "isDynamicEntry": true,
     "src": "pages/index.vue"
   }
-}
+};
+
+export { client_manifest as default };
+//# sourceMappingURL=client.manifest.mjs.map
