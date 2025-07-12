@@ -27,6 +27,21 @@
             >Vue.js</a
           >.
         </p>
+        <div class="mt-10">
+          <h2 class="text-xl font-bold">Capitals</h2>
+          <p class="mt-2 text-xl leading-relaxed text-gray-700">
+            Currently, I’m working on
+            <a
+              href="https://capitopia.world/"
+              target="_blank"
+              class="text-blue-500 underline hover:no-underline"
+              >Capitopia</a
+            >
+            , a project that explores the world’s capitals through data, design
+            and storytelling.
+          </p>
+        </div>
+
         <div class="mt-10 flex items-center gap-3">
           <figure
             class="relative h-8 w-8 overflow-hidden rounded-full bg-gray-200"
