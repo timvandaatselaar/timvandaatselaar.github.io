@@ -37,7 +37,7 @@ const _sfc_main = {
   }
 };
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex min-h-dvh items-center py-20 px-8" }, _attrs))}><div class="mx-auto w-full max-w-5xl"><div class="max-w-2xl"><p class="text-3xl font-semibold leading-snug lg:text-5xl lg:leading-snug"> I&#39;m Tim, a Dutch Frontend Developer. I work at <a href="https://gravity.nl" target="_blank" class="text-blue-500 underline hover:no-underline">Gravity</a> and am specialized in <a href="https://tailwindcss.com/" target="_blank" class="text-blue-500 underline hover:no-underline">Tailwind CSS</a> and <a href="https://vuejs.org/" target="_blank" class="text-blue-500 underline hover:no-underline">Vue.js</a>. </p><div class="mt-10 flex items-center gap-3"><figure class="relative h-8 w-8 overflow-hidden rounded-full bg-gray-200"><img class="absolute top-0 left-0 h-full w-full object-cover" src="https://github.com/timvandaatselaar.png" alt="Tim van Daatselaar"></figure><h1 class="text-lg font-semibold">Tim van Daatselaar</h1></div></div></div></div>`);
+  _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex min-h-dvh items-center py-20 px-8" }, _attrs))}><div class="mx-auto w-full max-w-5xl"><div class="max-w-2xl"><p class="text-3xl font-semibold leading-snug lg:text-5xl lg:leading-snug"> I&#39;m Tim, a Dutch Frontend Developer. I work at <a href="https://gravity.nl" target="_blank" class="text-blue-500 underline hover:no-underline">Gravity</a> and am specialized in <a href="https://tailwindcss.com/" target="_blank" class="text-blue-500 underline hover:no-underline">Tailwind CSS</a> and <a href="https://vuejs.org/" target="_blank" class="text-blue-500 underline hover:no-underline">Vue.js</a>. </p><div class="mt-10"><h2 class="text-xl font-bold">Capitals</h2><p class="mt-2 text-xl leading-relaxed text-gray-700"> Currently, I\u2019m working on <a href="https://capitopia.world/" target="_blank" class="text-blue-500 underline hover:no-underline">Capitopia</a> , a project that explores the world\u2019s capitals through data, design and storytelling. </p></div><div class="mt-10 flex items-center gap-3"><figure class="relative h-8 w-8 overflow-hidden rounded-full bg-gray-200"><img class="absolute top-0 left-0 h-full w-full object-cover" src="https://github.com/timvandaatselaar.png" alt="Tim van Daatselaar"></figure><h1 class="text-lg font-semibold">Tim van Daatselaar</h1></div></div></div></div>`);
 }
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
@@ -48,4 +48,4 @@ _sfc_main.setup = (props, ctx) => {
 const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender]]);
 
 export { index as default };
-//# sourceMappingURL=index-a3037fd1.mjs.map
+//# sourceMappingURL=index-a0bd7aa7.mjs.map
