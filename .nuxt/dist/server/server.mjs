@@ -434,7 +434,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import("./_nuxt/index-a0bd7aa7.js").then((m) => m.default || m)
+    component: () => import("./_nuxt/index-816bdbe1.js").then((m) => m.default || m)
   }
 ];
 const appPageTransition = false;
