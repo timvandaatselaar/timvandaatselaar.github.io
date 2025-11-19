@@ -32,13 +32,12 @@
           <p class="mt-2 text-xl leading-relaxed text-gray-700">
             Currently, I’m working on
             <a
-              href="https://capitopia.world/"
+              href="https://fantasytips.nl"
               target="_blank"
               class="text-blue-500 underline hover:no-underline"
-              >Capitopia</a
+              >Fantasytips.nl</a
             >
-            , a project that explores the world’s capitals through data, design
-            and storytelling.
+            , a platform that provides tips and advice for fantasy football players in ESPN Fantasy Football and Fifa Fantasy WK 2026.
           </p>
         </div>
 
