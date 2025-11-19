@@ -27,3 +27,8 @@ yarn build
 ```
 
 Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).
+
+DEPLOY:
+npm run generate
+
+npx gh-pages -d dist

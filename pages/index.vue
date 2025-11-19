@@ -28,7 +28,7 @@
           >.
         </p>
         <div class="mt-10">
-          <h2 class="text-xl font-bold">Capitals</h2>
+          <h2 class="text-xl font-bold">Fantasy tips</h2>
           <p class="mt-2 text-xl leading-relaxed text-gray-700">
             Currently, I’m working on
             <a
@@ -37,7 +37,8 @@
               class="text-blue-500 underline hover:no-underline"
               >Fantasytips.nl</a
             >
-            , a platform that provides tips and advice for fantasy football players in ESPN Fantasy Football and Fifa Fantasy WK 2026.
+            , a platform that provides tips and advice for fantasy football
+            players in ESPN Fantasy Football and Fifa Fantasy WK 2026.
           </p>
         </div>
 
