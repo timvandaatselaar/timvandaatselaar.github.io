@@ -29,7 +29,7 @@
         </p>
         <div class="mt-10">
           <h2 class="text-xl font-bold">Fantasy tips</h2>
-          <p class="mt-2 text-xl leading-relaxed text-gray-700">
+          <p class="mt-2 text-xl leading-relaxed text-gray-700 dark:text-slate-300">
             Currently, I’m working on
             <a
               href="https://fantasytips.nl"
